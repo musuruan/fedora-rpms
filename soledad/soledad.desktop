@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Soledad
+Comment=Help Sol stop robots destroying the park
+Icon=soledad
+Exec=soledad
+Terminal=false
+StartupNotify=false
+Categories=Game;ArcadeGame;

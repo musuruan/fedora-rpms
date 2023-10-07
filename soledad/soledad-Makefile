@@ -1,0 +1,9 @@
+CC = gcc
+LDLIBS  = -lm -lvorbisfile -lvorbis -logg -lSDL2 -lphysfs -lpng16 -lz -lspeechd 
+CFLAGS += -std=c99
+
+OBJ=$(patsubst %.c,%.o,$(wildcard *.c))
+
+soledad: $(OBJ)
+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+
