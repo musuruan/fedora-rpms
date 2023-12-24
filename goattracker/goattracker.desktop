@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=GoatTracker
+Exec=goattracker %F
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=goattrk2.xpm
+Categories=AudioVideo;AudioVideoEditing;
+MimeType=audio/sng;
