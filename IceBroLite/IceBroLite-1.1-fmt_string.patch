@@ -1,0 +1,266 @@
+diff -durN IceBroLite-1.1.orig/src/views/BreakpointView.cpp IceBroLite-1.1/src/views/BreakpointView.cpp
+--- IceBroLite-1.1.orig/src/views/BreakpointView.cpp	2022-12-25 15:49:35.000000000 +0100
++++ IceBroLite-1.1/src/views/BreakpointView.cpp	2022-12-30 19:19:42.307963550 +0100
+@@ -202,21 +202,21 @@
+ 				num.append_num(bp.number, 0, 10);
+ 				ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetColumnWidth() - ImGui::CalcTextSize(num.c_str()).x
+ 									 - ImGui::GetScrollX() - 2 * ImGui::GetStyle().ItemSpacing.x);
+-				ImGui::Text(num.c_str());
++				ImGui::Text("%s", num.c_str());
+ 				ImGui::TableSetColumnIndex(col++);
+ 				num.clear();
+ 				num.append('$').append_num(bp.start, 4, 16);
+ 				if (bp.end != bp.start) {
+ 					num.append("-$").append_num(bp.end, 4, 16);
+ 				}
+-				ImGui::Text(num.c_str());
++				ImGui::Text("%s", num.c_str());
+ 				if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
+ 					SymbolDragDrop drag;
+ 					drag.address = bp.start;
+ 					strovl lblStr(drag.symbol, sizeof(drag.symbol));
+ 					lblStr.copy(num); lblStr.c_str();
+ 					ImGui::SetDragDropPayload("AddressDragDrop", &drag, sizeof(drag));
+-					ImGui::Text(num.c_str());
++					ImGui::Text("%s", num.c_str());
+ 					ImGui::EndDragDropSource();
+ 				}
+ 				ImGui::TableSetColumnIndex(col++);
+@@ -225,7 +225,7 @@
+ 					num.clear();
+ 					num.append(label);
+ 					if (offs) { num.append("+$").append_num(offs, 4, 16); }
+-					ImGui::Text(num.c_str());
++					ImGui::Text("%s", num.c_str());
+ 
+ 					if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
+ 						SymbolDragDrop drag;
+@@ -243,7 +243,7 @@
+ 						ViceSetCondition(bp.number, conditionEdit);
+ 					}
+ 				} else if (bp.condition) {
+-					ImGui::Text(bp.condition);
++					ImGui::Text("%s", bp.condition);
+ 				}
+ 			}
+ 		}
+diff -durN IceBroLite-1.1.orig/src/views/CodeView.cpp IceBroLite-1.1/src/views/CodeView.cpp
+--- IceBroLite-1.1.orig/src/views/CodeView.cpp	2022-12-25 15:49:35.000000000 +0100
++++ IceBroLite-1.1/src/views/CodeView.cpp	2022-12-30 19:17:43.786727751 +0100
+@@ -252,7 +252,7 @@
+ 	bool editAsmDone = false;
+ 	while (lineNum<lines) {
+ 		if (const char* label = GetSymbol(read)) {
+-			ImGui::TextColored(C64_LGREEN, label);
++			ImGui::TextColored(C64_LGREEN, "%s", label);
+ 			lineNum++;
+ 		}
+ 		ImVec2 linePos = ImGui::GetCursorPos();
+@@ -285,7 +285,7 @@
+ 						lblStr.sprintf("$%04x", refAddr); lblStr.c_str();
+ 						ImGui::SetDragDropPayload("AddressDragDrop", &drag, sizeof(drag));
+ 						strown<8> refStr; refStr.append_num(refAddr, 4, 16);
+-						ImGui::Text(refStr.c_str());
++						ImGui::Text("%s", refStr.c_str());
+ 						ImGui::EndDragDropSource();
+ 					}
+ 				}
+@@ -322,7 +322,7 @@
+ 				}
+ 				ImGui::SetNextWindowBgAlpha(0.75f);
+ 				ImGui::BeginTooltip();
+-				ImGui::Text(disbuf.c_str());
++				ImGui::Text("%s", disbuf.c_str());
+ 				ImGui::EndTooltip();
+ 			}
+ 		}
+@@ -421,7 +421,7 @@
+ 				ViceAddBreakpoint(read);
+ 			}
+ 			// very cunningly draw code line AFTER breakpoint
+-			ImGui::Text(line.c_str());
++			ImGui::Text("%s", line.c_str());
+ 			if (showSrc && srcLine) {
+ 				ImGui::SameLine();
+ 				ImVec2 srcPos(linePos.x + srcCol * fontCharWidth, linePos.y);
+diff -durN IceBroLite-1.1.orig/src/views/ConsoleView.cpp IceBroLite-1.1/src/views/ConsoleView.cpp
+--- IceBroLite-1.1.orig/src/views/ConsoleView.cpp	2022-12-25 15:49:35.000000000 +0100
++++ IceBroLite-1.1/src/views/ConsoleView.cpp	2022-12-30 19:06:23.109859610 +0100
+@@ -464,7 +464,7 @@
+ 			strown<128> memStr;
+ 			memStr.append("= ").append_num(value, 4, 16);
+ 			for (int b = 0; b < 32; ++b) { memStr.append(' ').append_num(cpu->GetByte(uint16_t(value + b)), 2, 16); }
+-			AddLog(memStr.c_str());
++			AddLog("%s", memStr.c_str());
+ 		} else {
+ 			AddLog("= $%x", value);
+ 		}
+diff -durN IceBroLite-1.1.orig/src/views/FilesView.cpp IceBroLite-1.1/src/views/FilesView.cpp
+--- IceBroLite-1.1.orig/src/views/FilesView.cpp	2022-12-25 15:49:35.000000000 +0100
++++ IceBroLite-1.1/src/views/FilesView.cpp	2022-12-30 19:21:01.996777374 +0100
+@@ -54,7 +54,7 @@
+ 				else { filterStr.append(", "); }
+ 				filterStr.append(filtType).append(" (").append(filt).append(")");
+ 			}
+-			ImGui::Text(filterStr.c_str());
++			ImGui::Text("%s", filterStr.c_str());
+ 		}
+ 		const ImGuiTableFlags flags = ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg |
+ 			ImGuiTableFlags_SizingStretchProp |/* ImGuiTableFlags_Resizable |*/ ImGuiTableFlags_NoSavedSettings |
+@@ -71,7 +71,7 @@
+ 				if (files[i].fileType == FVFileInfo::dir) {
+ 					ImGui::Text("(dir)");
+ 				} else {
+-					if (files[i].size < (10 * 1024)) { ImGui::Text("%d", files[i].size); }
++					if (files[i].size < (10 * 1024)) { ImGui::Text("%ld", files[i].size); }
+ 					else  if (files[i].size < (1024 * 1024)) { ImGui::Text("%.1fkb", (float)(files[i].size/1024.0f)); }
+ 					else { ImGui::Text("%.2fMb", (float)(files[i].size / (1024.0f*1024.0f))); }
+ 				}
+diff -durN IceBroLite-1.1.orig/src/views/MemView.cpp IceBroLite-1.1/src/views/MemView.cpp
+--- IceBroLite-1.1.orig/src/views/MemView.cpp	2022-12-25 15:49:35.000000000 +0100
++++ IceBroLite-1.1/src/views/MemView.cpp	2022-12-30 19:20:25.778316487 +0100
+@@ -211,7 +211,7 @@
+ 					line.push_utf8(0xee00+cpu->GetByte(chars++));
+ 				}
+ 			}
+-			ImGui::Text(line.c_str());
++			ImGui::Text("%s", line.c_str());
+ 			read += spanWin;
+ 		}
+ 
+@@ -258,7 +258,7 @@
+ 					uint8_t b = cpu->GetByte(addrValue+(cursor[0]-colT)+cursor[1]*spanWin);
+ 					curChr.push_utf8(0xee00+b);//curChr[ 0 ] = ScreenToAscii( b );
+ 				}
+-				ImGui::TextColored(style.Colors[ImGuiCol_ChildBg], curChr.c_str());
++				ImGui::TextColored(style.Colors[ImGuiCol_ChildBg], "%s", curChr.c_str());
+ 			}
+ 		}
+ 	}
+diff -durN IceBroLite-1.1.orig/src/views/RegView.cpp IceBroLite-1.1/src/views/RegView.cpp
+--- IceBroLite-1.1.orig/src/views/RegView.cpp	2022-12-25 15:49:35.000000000 +0100
++++ IceBroLite-1.1/src/views/RegView.cpp	2022-12-30 19:17:25.545999262 +0100
+@@ -92,7 +92,7 @@
+ 	regs.append_num(r.LIN, 3, 16).append(' ');
+ 	regs.append_num(r.CYC, 3, 16).append(' ');
+ 	ImVec2 curPos = ImGui::GetCursorPos();
+-	ImGui::Text(regs.c_str());
++	ImGui::Text("%s", regs.c_str());
+ 
+ 	if (active && editing && cursor >= 0) {
+ 		int o = cursor;
+@@ -157,7 +157,7 @@
+ 			ImColor(255, 255, 255));
+ 		strown<16> curChr;
+ 		curChr.append(regs[cursor]);
+-		ImGui::TextColored(style.Colors[ImGuiCol_ChildBg], curChr.c_str());
++		ImGui::TextColored(style.Colors[ImGuiCol_ChildBg], "%s", curChr.c_str());
+ 	}
+ 
+ 	wasActive = active;
+diff -durN IceBroLite-1.1.orig/src/views/SymbolView.cpp IceBroLite-1.1/src/views/SymbolView.cpp
+--- IceBroLite-1.1.orig/src/views/SymbolView.cpp	2022-12-25 15:49:35.000000000 +0100
++++ IceBroLite-1.1/src/views/SymbolView.cpp	2022-12-30 19:35:48.386576190 +0100
+@@ -117,10 +117,10 @@
+ 
+                 strown<16> str;
+                 str.append('$').append_num(address, address < 0x10000 ? 4 : 0, 16);
+-                ImGui::Text(str.c_str());
++                ImGui::Text("%s", str.c_str());
+ 
+                 ImGui::TableSetColumnIndex(1);
+-                ImGui::Text(symbol);
++                ImGui::Text("%s", symbol);
+ 
+                 if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID)) {
+                     SymbolDragDrop drag;
+@@ -133,11 +133,11 @@
+                 }
+ 
+                 ImGui::TableSetColumnIndex(2);
+-                ImGui::Text(section);
++                ImGui::Text("%s", section);
+             }
+         }
+ 
+         ImGui::EndTable();
+     }
+     ImGui::End();
+-}
+\ Manca newline alla fine del file
++}
+diff -durN IceBroLite-1.1.orig/src/views/ToolBar.cpp IceBroLite-1.1/src/views/ToolBar.cpp
+--- IceBroLite-1.1.orig/src/views/ToolBar.cpp	2022-12-25 15:49:35.000000000 +0100
++++ IceBroLite-1.1/src/views/ToolBar.cpp	2022-12-30 19:39:58.024852973 +0100
+@@ -34,7 +34,7 @@
+ 	textSize.x += 12.0f;
+ 	textSize.y += 4.0f;
+ 	ImGui::SetCursorPosX(0.5f * (ImGui::GetColumnWidth() - textSize.x) + ImGui::GetColumnOffset());
+-//	ImGui::Text( text );
++//	ImGui::Text("%s", text );
+ 	return ImGui::Button(text, textSize);
+ }
+ 
+@@ -44,7 +44,7 @@
+ 	textSize.x += 12.0f;
+ 	textSize.y += 4.0f;
+ 	ImGui::SetCursorPosX(0.5f * (ImGui::GetColumnWidth() - textSize.x) + ImGui::GetColumnOffset());
+-	ImGui::Text( text );
++	ImGui::Text("%s", text );
+ }
+ 
+ void ToolBar::Draw()
+diff -durN IceBroLite-1.1.orig/src/views/TraceView.cpp IceBroLite-1.1/src/views/TraceView.cpp
+--- IceBroLite-1.1.orig/src/views/TraceView.cpp	2022-12-25 15:49:35.000000000 +0100
++++ IceBroLite-1.1/src/views/TraceView.cpp	2022-12-30 19:38:46.862916737 +0100
+@@ -154,24 +154,24 @@
+ 					str.append(hit.fl & 0x04 ? 'I' : '.');
+ 					str.append(hit.fl & 0x02 ? 'Z' : '.');
+ 					str.append(hit.fl & 0x01 ? 'C' : '.');
+-					ImGui::SetTooltip(str.c_str());
++					ImGui::SetTooltip("%s", str.c_str());
+ 					str.clear();
+ 				}
+ 				ImGui::TableSetColumnIndex(0);
+ 				str.append_num(hit.addr, 4, 16);
+-				ImGui::Text(str.c_str());
++				ImGui::Text("%s", str.c_str());
+ 				ImGui::TableSetColumnIndex(1);
+ 				str.clear();
+ 				str.append_num(hit.pc, 4, 16);
+-				ImGui::Text(str.c_str());
++				ImGui::Text("%s", str.c_str());
+ 				ImGui::TableSetColumnIndex(2);
+ 				str.clear();
+ 				str.append_num(hit.line, 0, 10).append('/').append_num(hit.cycle,0,10);
+-				ImGui::Text(str.c_str());
++				ImGui::Text("%s", str.c_str());
+ 				ImGui::TableSetColumnIndex(3);
+ 				str.clear();
+ 				str.append_num(hit.frame, 0, 10);
+-				ImGui::Text(str.c_str());
++				ImGui::Text("%s", str.c_str());
+ 				++numRows;
+ 			}
+ 			lastDrawnRows = (int)(numRows + (size_t)(winSize.y - ImGui::GetCursorPosY()) / ImGui::GetFontSize());
+diff -durN IceBroLite-1.1.orig/src/views/WatchView.cpp IceBroLite-1.1/src/views/WatchView.cpp
+--- IceBroLite-1.1.orig/src/views/WatchView.cpp	2022-12-25 15:49:35.000000000 +0100
++++ IceBroLite-1.1/src/views/WatchView.cpp	2022-12-30 19:41:30.857465285 +0100
+@@ -297,7 +297,7 @@
+ 		if (rebuildAll) { Evaluate(i); } else if (recalcAll) { EvaluateItem(i); }
+ 		if (i != editExpression) {
+ 			if ((i & 1) == 0) { DrawBlueTextLine(); }
+-			ImGui::Text(expressions[i].c_str());
++			ImGui::Text("%s", expressions[i].c_str());
+ 			if (cpu->MemoryChange()) { Evaluate(i); }
+ 		} else {
+ 			if (forceEdit) {
+@@ -316,7 +316,7 @@
+ 		ImGui::NextColumn();
+ 		if (currWidth < 0) { currWidth = (int)ImGui::GetColumnWidth(); }
+ 		if ((i & 1) != 0) { DrawBlueTextLine(); }
+-		ImGui::Text(results[i].c_str());
++		ImGui::Text("%s", results[i].c_str());
+ 
+ 		if (ImGui::IsMouseReleased(ImGuiMouseButton_Right)) {
+ 			ImVec2 mousePos = ImGui::GetMousePos();

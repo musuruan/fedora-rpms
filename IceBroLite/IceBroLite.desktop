@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=IceBroLite
+Exec=IceBroLite
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=IceBroLite
+Categories=Development;Debugger;
