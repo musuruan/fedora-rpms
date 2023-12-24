@@ -1,0 +1,11 @@
+diff -durN nxengine-evo-2.6.5-1.orig/src/siflib/sectStringArray.h nxengine-evo-2.6.5-1/src/siflib/sectStringArray.h
+--- nxengine-evo-2.6.5-1.orig/src/siflib/sectStringArray.h	2021-07-08 12:48:08.000000000 +0200
++++ nxengine-evo-2.6.5-1/src/siflib/sectStringArray.h	2023-04-01 21:03:38.553686500 +0200
+@@ -1,6 +1,7 @@
+ 
+ #ifndef _SECT_STRINGARRAY_H
+ #define _SECT_STRINGARRAY_H
++#include <cstdint>
+ #include <string>
+ #include <vector>
+ 
