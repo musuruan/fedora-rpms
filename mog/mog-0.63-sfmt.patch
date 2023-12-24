@@ -1,0 +1,66 @@
+diff -urN mog-0.63.1548/sources/debug.cpp mog-0.63.1548-patched/sources/debug.cpp
+--- mog-0.63.1548/sources/debug.cpp	2008-09-14 06:31:49.000000000 +1100
++++ mog-0.63.1548-patched/sources/debug.cpp	2014-03-18 21:16:56.383929835 +1100
+@@ -28,7 +28,7 @@
+     if (fp == 0)
+ 		fp = f1open("mog.dbg", "w", USERDATA);
+ 
+-    fprintf(fp, text);
++    fprintf(fp, "%s", text);
+     fflush(fp);
+ } /* glprintf */
+ 
+diff -urN mog-0.63.1548/sources/gamecycle.cpp mog-0.63.1548-patched/sources/gamecycle.cpp
+--- mog-0.63.1548/sources/gamecycle.cpp	2008-09-14 06:31:49.000000000 +1100
++++ mog-0.63.1548-patched/sources/gamecycle.cpp	2014-03-18 21:14:25.558553905 +1100
+@@ -1288,42 +1288,42 @@
+ 					tile_print("PRESS A KEY FOR UP:",TILE_SIZE_X*2,TILE_SIZE_Y*2,screen,dx,dy);
+ 				} /* if */ 
+ 				if (SUBSTATE>=1) { 
+-					sprintf(tmp,SDL_GetKeyName((SDLKey)UP_KEY));
++					sprintf(tmp, "%s", SDL_GetKeyName((SDLKey)UP_KEY));
+ 					tile_print(strupr(tmp),TILE_SIZE_X*26,TILE_SIZE_Y*2,screen,dx,dy);
+ 					tile_print("PRESS A KEY FOR DOWN:",TILE_SIZE_X*2,TILE_SIZE_Y*4,screen,dx,dy);
+ 				} /* if */ 
+ 				if (SUBSTATE>=2) { 
+-					sprintf(tmp,SDL_GetKeyName((SDLKey)DOWN_KEY));
++					sprintf(tmp, "%s", SDL_GetKeyName((SDLKey)DOWN_KEY));
+ 					tile_print(strupr(tmp),TILE_SIZE_X*26,TILE_SIZE_Y*4,screen,dx,dy);
+ 					tile_print("PRESS A KEY FOR LEFT:",TILE_SIZE_X*2,TILE_SIZE_Y*6,screen,dx,dy);
+ 				} /* if */ 
+ 				if (SUBSTATE>=3) {  
+-					sprintf(tmp,SDL_GetKeyName((SDLKey)LEFT_KEY));
++					sprintf(tmp, "%s", SDL_GetKeyName((SDLKey)LEFT_KEY));
+ 					tile_print(strupr(tmp),TILE_SIZE_X*26,TILE_SIZE_Y*6,screen,dx,dy);
+ 					tile_print("PRESS A KEY FOR RIGHT:",TILE_SIZE_X*2,TILE_SIZE_Y*8,screen,dx,dy);
+ 				} /* if */ 
+ 				if (SUBSTATE>=4) { 
+-					sprintf(tmp,SDL_GetKeyName((SDLKey)RIGHT_KEY));
++					sprintf(tmp, "%s", SDL_GetKeyName((SDLKey)RIGHT_KEY));
+ 					tile_print(strupr(tmp),TILE_SIZE_X*26,TILE_SIZE_Y*8,screen,dx,dy);
+ 					tile_print("PRESS A KEY FOR SWORD:",TILE_SIZE_X*2,TILE_SIZE_Y*10,screen,dx,dy);
+ 				} /* if */ 
+ 				if (SUBSTATE>=5) { 
+-					sprintf(tmp,SDL_GetKeyName((SDLKey)SWORD_KEY));
++					sprintf(tmp, "%s", SDL_GetKeyName((SDLKey)SWORD_KEY));
+ 					tile_print(strupr(tmp),TILE_SIZE_X*26,TILE_SIZE_Y*10,screen,dx,dy);
+ 					tile_print("PRESS A KEY FOR WEAPON:",TILE_SIZE_X*2,TILE_SIZE_Y*12,screen,dx,dy);
+ 				} /* if */ 
+ 				if (SUBSTATE>=6) { 
+-					sprintf(tmp,SDL_GetKeyName((SDLKey)WEAPON_KEY));
++					sprintf(tmp, "%s", SDL_GetKeyName((SDLKey)WEAPON_KEY));
+ 					tile_print(strupr(tmp),TILE_SIZE_X*26,TILE_SIZE_Y*12,screen,dx,dy);
+ 					tile_print("PRESS A KEY FOR ITEM:",TILE_SIZE_X*2,TILE_SIZE_Y*14,screen,dx,dy);
+ 				} /* if */ 
+ 				if (SUBSTATE>=7) {
+-					sprintf(tmp,SDL_GetKeyName((SDLKey)ITEM_KEY));
++					sprintf(tmp, "%s", SDL_GetKeyName((SDLKey)ITEM_KEY));
+ 					tile_print(strupr(tmp),TILE_SIZE_X*26,TILE_SIZE_Y*14,screen,dx,dy);
+ 					tile_print("PRESS A KEY FOR PAUSE:",TILE_SIZE_X*2,TILE_SIZE_Y*16,screen,dx,dy);
+ 				} /* if */ 
+ 				if (SUBSTATE>=8) { 
+-					sprintf(tmp,SDL_GetKeyName((SDLKey)PAUSE_KEY));
++					sprintf(tmp, "%s", SDL_GetKeyName((SDLKey)PAUSE_KEY));
+ 					tile_print(strupr(tmp),TILE_SIZE_X*26,TILE_SIZE_Y*16,screen,dx,dy);
+ 				} /* if */ 
+ 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>mog.desktop</id>
+  <name>The Maze of Galious</name>
+  <summary>A side-view, flick-screen platform game</summary>
+  <developer_name>Brain Games</developer_name>
+  <description>
+  <p>
+  The Maze of Galious (MoG in short) was originally a Konami game for the MSX
+  computer system. Its real name is Knightmare II: The Maze of Galious and is
+  the sequel of another Konami game called Knightmare.
+  </p>
+  <p>
+  MoG is a very addictive game where you have to kill thousands of enemies,
+  collect items in order to obtain new powers and defeat some really great 
+  demons at the end of each level. The gameplay of MoG is not the boring
+  linear one.
+  </p>
+  <p>
+  In MoG you are free to go everywhere you want from the beginning of the game.
+  You have to be very careful of the order in which you visit all the rooms in
+  the HUGE map if you want to keep your character alive. The map is structured
+  in a main map (called the castle) and 10 submaps (called the worlds).
+  Initially you are in the castle and you have to find the keys that open the
+  doors to go to each of the worlds. To complete the game you have to defeat
+  the boss at the end of each one of the 10 worlds. You are free to revisit
+  each world as often as you want in order to see if you have missed something.
+  </p>
+  <p>
+  To defeat all 10 demons you control two characters: Popolon and Aphrodite.
+  Each one has special abilities, i.e. Popolon has a greater ability to jump
+  and Aphrodite is able to dive.
+  </p>
+  </description>
+  <metadata_license>CC-BY-3.0</metadata_license>
+  <project_license>GPLv2</project_license>
+  <url type="homepage">https://mog.jorito.net/</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://mog.jorito.net/pics/screenshot1.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>https://mog.jorito.net/pics/screenshot2.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://mog.jorito.net/pics/screenshot3.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://mog.jorito.net/pics/screenshot4.jpg</image>
+    </screenshot>
+  </screenshots>
+</component>
+
