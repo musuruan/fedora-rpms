@@ -3,7 +3,7 @@
 
 Name:           geowrite2rtf
 Version:        0
-Release:        1.20150202git.e4cebb2%{?dist}
+Release:        2.20150202git.e4cebb2%{?dist}
 Summary:        Convert C64/C128 GEOS GeoWrite documents to RTF format
 
 License:        BSD
@@ -11,6 +11,7 @@ URL:            https://github.com/mist64/geowrite2rtf
 Source0:        https://github.com/mist64/geowrite2rtf/archive/%{commit}/%{name}-%{version}-%{shortcommit}.tar.gz
 
 BuildRequires:  gcc
+BuildRequires:  make
 
 %description
 geowrite2rtf is a simple tool that converts a C64/C128 GEOS GeoWrite document
@@ -31,8 +32,7 @@ sed -i 's/cc -o $@ $</cc $(CFLAGS) $(LDFLAGS) -o $@ $</' Makefile
 
 
 %build
-export CFLAGS="%{optflags}"
-export LDFLAGS="%{__global_ldflags}"
+%set_build_flags
 %make_build
 
 
@@ -47,6 +47,8 @@ install -pm 0755 %{name} %{buildroot}%{_bindir}
 
 
 %changelog
+* Sun Dec 24 2023 Andrea Musuruane <musuruan@gmail.com> - 0-2.20150202git.e4cebb2
+- Modernized spec file
+
 * Fri May 11 2018 Andrea Musuruane <musuruan@gmail.com> - 0-1.20150202git.e4cebb2
 - First release
-
