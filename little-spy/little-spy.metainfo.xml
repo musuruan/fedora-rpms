@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>little-spy.desktop</id>
+  <name>Little Spy</name>
+  <summary>Recover stolen intelligence and technology.</summary>
+  <developer_name>Martin Wimpress</developer_name>
+  <description>
+  <p>
+  Airdrop into an enemy stronghold, recover stolen intelligence and technology.
+  </p>
+  <p>
+  Collect as much stolen intelligence and technology as you can and get to the
+  extraction point before the helicopter leaves without you. Earn a higher agent
+  ranking by collecting more items and complete the mission as fast as possible
+  to earn a higher bonus.
+  </p>
+  </description>
+  <metadata_license>CC-BY-4.0</metadata_license>
+  <project_license>MIT</project_license>
+  <url type="homepage">https://wimpress.itch.io/little-spy/</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://img.itch.zone/aW1hZ2UvMTEwNTMxMy82NDc1MzEyLnBuZw==/original/5toKMP.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://img.itch.zone/aW1hZ2UvMTEwNTMxMy82NDc1MzE0LnBuZw==/original/MLkhi7.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://img.itch.zone/aW1hZ2UvMTEwNTMxMy82NDc1MzE2LnBuZw==/original/stqqhf.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://img.itch.zone/aW1hZ2UvMTEwNTMxMy82NDc1MzE4LnBuZw==/original/MJxUuF.png</image>
+    </screenshot>
+  </screenshots>
+</component>
+
