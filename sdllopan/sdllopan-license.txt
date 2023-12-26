@@ -1,0 +1,91 @@
+Delivered-To: musuruan@gmail.com
+Received: by 10.159.38.3 with SMTP id 3csp4391499uag;
+        Sun, 24 Dec 2017 09:31:23 -0800 (PST)
+X-Received: by 10.176.84.158 with SMTP id p30mr12637288uaa.184.1514136683776;
+        Sun, 24 Dec 2017 09:31:23 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1514136683; cv=none;
+        d=google.com; s=arc-20160816;
+        b=vG3Rn6REVTDcDHp/4P5lWUBltn7NH8NUgBJYqwFf0MJzo9uuI+UYSKH6k+DERlQUa6
+         er7mX+T2OrpypkMHRSouJogjEIPIY5lI16vLv9SUPlLY+HIDy/bBT6ojYcErpi9fpdkB
+         KByiCWk9Dp/G4JwPXjQ+x8gvzRGyxQqz1K4NMYRrngnEb0SWZkkQfnEEbISDof/Nlpd/
+         hoFQVMLLxq3vRLDmky1Au+IsX5LOj9bWjyRY1POmVriRmUgnfX/gdgEDUFUKTavxOUlI
+         XELrEYhLh273e/Hb2XlG916mJQ7UfH7yG8Be74LaS9ZON+NxxUnAgw6z0v/+YaAGYv5P
+         jNGw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=to:subject:message-id:date:from:references:in-reply-to:mime-version
+         :dkim-signature:arc-authentication-results;
+        bh=8HkXvTGg6bVxVrCW72xWyglVBw/XfF7dzhZ2ypT5W3w=;
+        b=MVcmUux135GtrQl3Hs4NF+Igt/gAOI0Pir2fBtswQdGyPnxmrCwWUBOHfXhDwZuL6Z
+         jKUkKe25xvbHWwNp2DpmV2hOc88J2EhDnE1O8/eNXTRMQt7GDKox/a2gWB4f8O9+FSes
+         EfdHAJCqwlIvqSSjn5Ryg70AJv5/cr/6gQplCfxyYD5On//OnoU77dmoxF3d7pEKlQLD
+         ymgOlLop9b/8P66KiHDRoUFynPJTRGrqtGOIAtL7QLcRS0MylKySkcnLZrYIueuUyHew
+         5Fz04soiPCmg/WD2ibENoilSMktpP0MejY1t3fXCHzbl3kxKImHU2sgV0V+O9Yqtfeqa
+         cdBg==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=GBc/T8E0;
+       spf=pass (google.com: domain of dashxdr@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=dashxdr@gmail.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=gmail.com
+Return-Path: <dashxdr@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id r11sor5254222vkf.169.2017.12.24.09.31.23
+        for <musuruan@gmail.com>
+        (Google Transport Security);
+        Sun, 24 Dec 2017 09:31:23 -0800 (PST)
+Received-SPF: pass (google.com: domain of dashxdr@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20161025 header.b=GBc/T8E0;
+       spf=pass (google.com: domain of dashxdr@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=dashxdr@gmail.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:in-reply-to:references:from:date:message-id:subject:to;
+        bh=8HkXvTGg6bVxVrCW72xWyglVBw/XfF7dzhZ2ypT5W3w=;
+        b=GBc/T8E0fR6GzAlBAV8IewiUKOL3u0AGZcOZ6Mt+wsRGx1K7HSU/q2GOgR0IlYsAy7
+         mbKuAgLcbSZluyjWeidWOCblKnInH3TcflS2aoSUohTjHtMsHRG0shRS1LmWCIJlfbh6
+         mGziIIzbHuxjypjXbZCOEM68NuDawCYsNo4WEp3NDlOWHVy7d3fW42FW3S9Oi03BDusJ
+         iH9XlzLELBBiDwKJ/N4u05/ep/rRUcOlSpXG3DgYwoJXmHufNhoy3nq49FLtMkivm7B0
+         5BFWH2YBKGZuq+WHqP650N1519rk4/20Qz29DPdy7rWPLy+ltqR6q+eBu1FshdBGS7p0
+         if+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+         :message-id:subject:to;
+        bh=8HkXvTGg6bVxVrCW72xWyglVBw/XfF7dzhZ2ypT5W3w=;
+        b=kMf7uoihVAMVlpN64fwe1zf0vK2mKRrRiQnQIw0Nyykva9rfV41BxZxKfQDGRL5xtb
+         hgnAOTIzOV7onwoMb5rw4UFsM5ERbSnC1HRH2N91t/MguV+52sJKW/omXFL7/uLvBfct
+         62pbY2nA5qqR9dJUezEiaxl8L9jpVLRIX/WnwtAX++pDJsiWggygXRkK9L8H3EMMrDI8
+         x2wcAfgih12PlOE3/tLNBuhet84njMxyJ7yOe0e+lmdZIKev9EyoyrFZEYwrOFdpSF/q
+         0x78xIVvIN49lxzjc2IveIkTbj8EY3+2X1aXOIxvXYgdPYLV1TN/ZEuX6YwzXvSHTdhq
+         4lYw==
+X-Gm-Message-State: AKGB3mJ8F5+j+Dr6a07QoU6D675pWWV/phUG1QjniuzbdqfQCaLjvHmn
+	KtYUfensRppkd00fRf4D1LZ5cBCm3Y3kaGzLvVQ=
+X-Google-Smtp-Source: ACJfBov2scwb1jL7WVDAj1P1aQsh1iwvf3Gl6C+wrnTGuUlz0NtVGwVaWe0psm+IIvkutKGESFfZxB00D3cV0tlm/Zo=
+X-Received: by 10.31.89.65 with SMTP id n62mr10846096vkb.19.1514136683251;
+ Sun, 24 Dec 2017 09:31:23 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.103.90.79 with HTTP; Sun, 24 Dec 2017 09:31:22 -0800 (PST)
+In-Reply-To: <CAOpAdyCWg8o2ek_KQGNUnnVABx-DBCgtuTAXUCYbzNgVcet0=A@mail.gmail.com>
+References: <CAOpAdyCWg8o2ek_KQGNUnnVABx-DBCgtuTAXUCYbzNgVcet0=A@mail.gmail.com>
+From: David Ashley <dashxdr@gmail.com>
+Date: Sun, 24 Dec 2017 11:31:22 -0600
+Message-ID: <CABkE59AfbPgnAOq7FAOOrwu0CXYP2aK0xTLBwkMAxHr_m0Rb8w@mail.gmail.com>
+Subject: Re: SDL Lopan
+To: Andrea Musuruane <musuruan@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+
+Any GPL will do. Or you can sell it. You won't get any trouble from me!
+-Dave
+
+On 12/24/17, Andrea Musuruane <musuruan@gmail.com> wrote:
+> Hi David,
+>     I've made an RPM package of SDL Lopan for Fedora and I want to submit
+> it to either Fedora or RPM Fusion.
+>
+> Unluckily I cannot find any statement about the license.
+>
+> Can you please clarify how SDL Lopan can be used and redistributed?
+>
+> Thanks,
+>
+> Andrea
+>

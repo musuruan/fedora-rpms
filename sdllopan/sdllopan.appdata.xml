@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+<id>sdllopan.desktop</id>
+	<metadata_license>CC-BY-SA-3.0</metadata_license>
+	<project_license>GPL+</project_license>
+	<name>SDL Lopan</name>
+	<summary>Mahjong solitaire</summary>
+	<description>
+		<p>
+		Classical Chinese solitaire game.
+		</p>
+		<p>
+		The goal is to click on pairs of matching tiles to make them
+		go away to eventually clear the board. 
+		</p>
+		<p>
+		Tiles can only be clicked on if they're not blocked sideways or
+		above by another tile. Most tiles only match identical ones, 
+		but:
+		<ul>
+		<li>any two flowers match</li>
+		<li>any two seasons match</li>
+		</ul>
+		</p>
+	</description>
+	<screenshots>
+		<screenshot type="default">
+			<image>http://www.linuxmotors.com/sdllopan/sdllopan.gif</image>
+		</screenshot>
+	</screenshots>
+	<url type="homepage">http://www.linuxmotors.com/sdllopan/</url>
+</component>
+

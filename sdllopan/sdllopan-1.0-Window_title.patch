@@ -1,0 +1,26 @@
+From 213275e0a82538697cadc569a30a9e2516596708 Mon Sep 17 00:00:00 2001
+From: Scott McCreary <scottmc2@gmail.com>
+Date: Wed, 1 Feb 2017 21:23:54 -0800
+Subject: [PATCH] Add Window title
+
+---
+ gfx.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/gfx.c b/gfx.c
+index 4a5e1bc..81935d1 100644
+--- a/gfx.c
++++ b/gfx.c
+@@ -295,6 +295,7 @@ unsigned char r,g,b;
+ 	}
+ 	stride=thescreen->pitch;
+ 	videomem=(void *)thescreen->pixels;
++	SDL_WM_SetCaption("SDL Lopan", "SDL Lopan");
+ //	SDL_ShowCursor(0);
+
+ 	for(i=0;i<65536;++i)
+--
+2.7.0
+
+
+
