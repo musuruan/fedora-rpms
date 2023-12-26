@@ -1,5 +1,5 @@
 Name:           IceBroLite
-Version:        1.1
+Version:        1.18
 Release:        1%{?dist}
 Summary:        External Debugger for VICE 3.5 and higher
 
@@ -8,16 +8,19 @@ License:        unknown
 URL:            https://github.com/Sakrac/IceBroLite
 Source0:        %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        %{name}.desktop
-Patch0:         %{name}-1.1-fmt_string.patch
+Patch0:         %{name}-1.18-fmt_string.patch
 
 BuildRequires:  make
 BuildRequires:  gcc-g++
 BuildRequires:  glfw-devel
+BuildRequires:  ImageMagick
 BuildRequires:  desktop-file-utils
 #BuildRequires:  libappstream-glib
 Requires:       hicolor-icon-theme
-# TODO: remove boundled imgui
+
+# imgui is not yet packaged
 # https://github.com/ocornut/imgui/
+Provides:       bundled(imgui)
 
 %description
 IceBro Lite is a source-level debugger with a graphical user interface (GUI).
@@ -53,11 +56,15 @@ desktop-file-install \
   --dir %{buildroot}%{_datadir}/applications \
   %{SOURCE1}
 
-# Install icon
-# TODO: l'icona non viene visualizzata
-install -d %{buildroot}%{_datadir}/icons/hicolor/42x42/apps
-install -m 644 -p assets/icebrolite.png \
-  %{buildroot}%{_datadir}/icons/hicolor/42x42/apps/%{name}.png
+# Resize and install icon
+install -d %{buildroot}%{_datadir}/icons/hicolor/48x48/apps
+convert -resize 48x48 \
+  -extent 48x48 \
+  -gravity center \
+  -background none \
+  assets/icebrolite.png \
+  %{buildroot}%{_datadir}/icons/hicolor/48x48/apps/%{name}.png
+
 
 # TODO: appData file
 
@@ -71,5 +78,8 @@ install -m 644 -p assets/icebrolite.png \
 
 
 %changelog
+* Sun Dec 24 2023 Andrea Musuruane <musuruan@gmail.com> - 1.18-1
+- Updated to new upstream release
+
 * Fri Dec 30 2022 Andrea Musuruane <musuruan@gmail.com> - 1.1-1
 - First version
