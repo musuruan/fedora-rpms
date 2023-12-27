@@ -1,6 +1,6 @@
 Name:           capitan
 Version:        1.0.3 
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Save Seville from the evil Torrebruno
 
 License:        GPLv3+
@@ -124,6 +124,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Wed Dec 27 2023 Andrea Musuruane <musuruan@gmail.com> - 1.0.3-3
+- Fix missing LDFLAGS
+
 * Sat Sep 11 2021 Andrea Musuruane <musuruan@gmail.com> - 1.0.3-2
 - Add make to BR
 
