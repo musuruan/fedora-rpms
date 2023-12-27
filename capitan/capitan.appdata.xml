@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>capitan.desktop</id>
+  <name>Captain 'S' The Remake</name>
+  <summary>Save Seville from the evil Torrebruno</summary>
+  <developer_name>CEZ RD</developer_name>
+  <description>
+  <p>
+   A calm day begins in Seville. Mariano López goes to his job as sausage
+   delivery man. Meanwhile, at Santiponce's interstratospheric device center,
+   everybody is getting ready to the first fully Spanish rocket launch,
+   designed by famous Dr. Torrebruno, an eminent nuclear physicist who had to
+   leave the project prematurely, due to a strange mental disease. But nobody
+   expected the rocket to suffer a sudden variation on its path, and falls
+   right on the truck that Mariano López uses to transport a blood sausages
+   cargo.
+  </p>
+  <p>
+   Mariano, unconscious, lies on the floor besides his sausages and the
+   truck's wreckage, spread all around. Some hours later, he wakes up really
+   hungry, and eats an entire box of the radiated blood sausages. But... what
+   the hell is happening!? Mariano is becoming different: Every muscle grows,
+   he becomes taller, his ugly face becomes a pretty superhero's, Captain 'S',
+   who discovers that everything was part of the evil Torrebruno's plan, with
+   the true intention of ruling the World, starting by Seville.
+  </p>
+  </description>
+  <metadata_license>CC-BY-3.0</metadata_license>
+  <project_license>GPLv3+</project_license>
+  <url type="homepage">http://computeremuzone.com/ficha.php?id=754&amp;l=en</url>
+  <screenshots>
+    <screenshot type="default">
+      <image>http://computeremuzone.com/fichas/c/CAPSEV000.png</image>
+    </screenshot>
+    <screenshot>
+      <image>http://computeremuzone.com/fichas/c/CAPSEV001.png</image>
+    </screenshot>
+  </screenshots>
+</component>

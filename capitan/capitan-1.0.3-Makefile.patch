@@ -1,0 +1,29 @@
+--- Makefile.old	2009-04-10 12:01:26.000000000 +0200
++++ Makefile	2019-03-21 18:15:05.329720964 +0100
+@@ -1,6 +1,6 @@
+ 
+ CC = g++
+-CFLAGS = -g3 -Iinclude -Isrc/include
++CXXFLAGS += -Iinclude -Isrc/include
+ LDFLAGS = -Llib -lalogg `allegro-config --libs` -lalfont -lpng -lz
+ 
+ PACKAGE = Capitan
+@@ -44,16 +44,14 @@
+ MD = mkdir -p
+ ECHO = echo
+ CHMOD = chmod
+-STRIP = strip
+ 
+ all: $(EXE)
+ 
+ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+-	$(CC) $(CFLAGS) -c $< -o $@
++	$(CXX) $(CXXFLAGS) -c $< -o $@
+ 
+ $(EXE): $(OBJECTS)
+-	$(CC) $^ -o $(EXE) $(LDFLAGS)
+-	$(STRIP) $@
++	$(CXX) $(LDFLAGS) $^ $(LDLIBS) -o $(EXE)
+ 
+ clean:
+ 	$(RM) $(OBJDIR)/*.o
