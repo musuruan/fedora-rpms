@@ -1,0 +1,20 @@
+diff -durN briskola-1.0.0.orig/data/menu/briskola.desktop briskola-1.0.0/data/menu/briskola.desktop
+--- briskola-1.0.0.orig/data/menu/briskola.desktop	2009-11-06 11:22:57.000000000 +0100
++++ briskola-1.0.0/data/menu/briskola.desktop	2009-11-28 15:46:20.329561107 +0100
+@@ -1,11 +1,12 @@
+ [Desktop Entry]
+-Type=Application
+ Version=1.0
+-GenericName=Briscola game
+ Name=BrisKola
+-Comment=Play briscola against computer
++GenericName=Briscola game
++GenericName[it]=Gioco della Briscola
++Comment=Play Briscola against computer
++Comment[it]=Gioca a Briscola contro il computer
+ Exec=briskola
+-Icon=briskola-icon.png
++Icon=briskola-icon
+ Terminal=false
+ Type=Application
+ Categories=Game;CardGame;

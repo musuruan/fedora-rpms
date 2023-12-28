@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+<id>briskola.desktop</id>
+	<metadata_license>CC-BY-SA-3.0</metadata_license>
+	<project_license>GPLv2+</project_license>
+	<name>BrisKola</name>
+	<summary>An Italian trick-taking card game</summary>
+	<description>
+		<p>
+		Briscola is one of the most popular Italian card games because
+		of its simple rules and the modest ability required to be
+		played.
+		</p>
+	</description>
+	<screenshots>
+		<screenshot type="default">
+			<image>http://www.briskola.net/images/screenshots/bkScreenshot_04.png</image>
+                        <image>http://www.briskola.net/images/screenshots/bkScreenshot_05.png</image>
+		</screenshot>
+	</screenshots>
+	<url type="homepage">http://www.briskola.net</url>
+</component>
+
