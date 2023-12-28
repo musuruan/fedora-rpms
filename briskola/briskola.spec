@@ -5,8 +5,8 @@ Summary:        An Italian trick-taking card game
 Summary(it):    Gioco di carte della Briscola
 
 License:        GPLv2+
-URL:            http://www.briskola.net/
-Source0:        http://www.briskola.net/files/%{name}-%{version}.tar.gz
+URL:            https://web.archive.org/web/20230927171816/http://www.briskola.net/
+Source0:        https://web.archive.org/web/20230927190649/http://www.briskola.net/files/%{name}-%{version}.tar.gz
 Source1:        %{name}.appdata.xml
 # Fix desktop file
 Patch0:         %{name}-1.0.0-desktop.patch
@@ -60,6 +60,8 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 %changelog
 * Thu Dec 28 2023 Andrea Musuruane <musuruan@gmail.com> - 1.0.0-3
+- URL and Source tag now are on archive.org because upstream is currently
+  unavailable
 - Used %%autosetup
 
 * Sat Sep 11 2021 Andrea Musuruane <musuruan@gmail.com> - 1.0.0-2
