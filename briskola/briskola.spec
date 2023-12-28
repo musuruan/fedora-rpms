@@ -1,6 +1,6 @@
 Name:           briskola
 Version:        1.0.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        An Italian trick-taking card game 
 Summary(it):    Gioco di carte della Briscola
 
@@ -29,8 +29,7 @@ sue semplici regole e alla modesta abilità richiesta ai giocatori.
 
 
 %prep
-%setup -q
-%patch0 -p1
+%autosetup -p1
 
 
 %build
@@ -60,6 +59,9 @@ appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata
 
 
 %changelog
+* Thu Dec 28 2023 Andrea Musuruane <musuruan@gmail.com> - 1.0.0-3
+- Used %%autosetup
+
 * Sat Sep 11 2021 Andrea Musuruane <musuruan@gmail.com> - 1.0.0-2
 - rebuilt
 
