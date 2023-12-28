@@ -1,0 +1,475 @@
+From f3b1c8b517063fba621a67215e8d164375e86734 Mon Sep 17 00:00:00 2001
+From: ericoporto <ericoporto2008@gmail.com>
+Date: Mon, 12 Feb 2018 10:00:11 -0200
+Subject: [PATCH 05/12] fixed conf.lua author and game title
+
+---
+ project/conf.lua | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/project/conf.lua b/project/conf.lua
+index c2b3a19..382e2a4 100644
+--- a/project/conf.lua
++++ b/project/conf.lua
+@@ -1,6 +1,6 @@
+ function love.conf(t)
+-    t.title = "Untitled"        -- The title of the window the game is in (string)
+-    t.author = "headchant"      -- The author of the game (string)
++    t.title = "CodenameLT"        -- The title of the window the game is in (string)
++    t.author = "VACAROXA"      -- The author of the game (string)
+     t.url = nil                 -- The website of the game (string)
+     t.identity = nil            -- The name of the save directory (string)
+     t.version = "0.10.0"         -- The LÖVE version this game was made for (string)
+
+From b51822675eedf41115e43f40322bd1fce1cf1ce8 Mon Sep 17 00:00:00 2001
+From: ericoporto <ericoporto2008@gmail.com>
+Date: Sat, 5 Jan 2019 19:43:30 -0200
+Subject: [PATCH 08/12] fix incompatibility with love11.0 and beyond
+
+---
+ project/main.lua | 27 ++++++++++++++++-----------
+ 1 file changed, 16 insertions(+), 11 deletions(-)
+
+diff --git a/project/main.lua b/project/main.lua
+index 708e160..c16586a 100644
+--- a/project/main.lua
++++ b/project/main.lua
+@@ -118,18 +118,22 @@ end
+ local screenShotFromLastState
+ 
+ local function saveScreenShotFromLastState()
+-  local scrn = love.graphics.newScreenshot()
+-	local canvas = love.graphics.newCanvas(GAME_WIDTH,GAME_HEIGHT) -- make a canvas that is the proper dimensions
+-	canvas:renderTo(function()
+-		love.graphics.setColor(255,255,255,255) -- set colour to white, i.e. draw normally
+-		love.graphics.draw(love.graphics.newImage(scrn),0,0, -- draw the screenshot at 0,0
+-		0, -- 0 rotation
+-		canvas:getWidth() / love.graphics.getWidth(), -- x scale
+-		canvas:getHeight() / love.graphics.getHeight() -- y scale
++
++  love.graphics.captureScreenshot( function(scrn)
++		local canvas = love.graphics.newCanvas(GAME_WIDTH,GAME_HEIGHT) -- make a canvas that is the proper dimensions
++		canvas:renderTo(function()
++			love.graphics.setColor(255,255,255,255) -- set colour to white, i.e. draw normally
++			love.graphics.draw(love.graphics.newImage(scrn),0,0, -- draw the screenshot at 0,0
++			0, -- 0 rotation
++			canvas:getWidth() / love.graphics.getWidth(), -- x scale
++			canvas:getHeight() / love.graphics.getHeight() -- y scale
+ 		)
++	  end)
++	  -- this resizes the canvas get's it's data and put's in an image
++	  screenShotFromLastState = love.graphics.newImage(canvas:newImageData())
++	
+   end)
+-  -- this resizes the canvas get's it's data and put's in an image
+-  screenShotFromLastState = love.graphics.newImage(canvas:newImageData())
++
+ end
+ 
+ function drawLastStateScreenshot()
+@@ -197,7 +201,8 @@ local function recursiveRequire(folder, tree)
+   local tree = tree or {}
+   for i,file in ipairs(love.filesystem.getDirectoryItems(folder)) do
+       local filename = folder.."/"..file
+-      if love.filesystem.isDirectory(filename) then
++      if love.filesystem.getInfo(filename, 'directory')   then
++--    love10.2 was this:  if love.filesystem.isDirectory(filename) then
+           recursiveRequire(filename)
+       elseif file ~= ".DS_Store" then
+           require(filename:gsub(".lua",""))
+
+From 591ab1bacce895c8ed9108d596284ef029503f29 Mon Sep 17 00:00:00 2001
+From: ericoporto <ericoporto2008@gmail.com>
+Date: Thu, 10 Jan 2019 21:52:02 -0200
+Subject: [PATCH 09/12] Changing Version support id on conf.lua to 11.2
+
+---
+ project/conf.lua | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/project/conf.lua b/project/conf.lua
+index 382e2a4..65ccc22 100644
+--- a/project/conf.lua
++++ b/project/conf.lua
+@@ -3,7 +3,7 @@ function love.conf(t)
+     t.author = "VACAROXA"      -- The author of the game (string)
+     t.url = nil                 -- The website of the game (string)
+     t.identity = nil            -- The name of the save directory (string)
+-    t.version = "0.10.0"         -- The LÖVE version this game was made for (string)
++    t.version = "11.2"         -- The LÖVE version this game was made for (string)
+     t.console = false           -- Attach a console (boolean, Windows only)
+     t.release = false           -- Enable release mode (boolean)
+     t.window.width = 800        -- The window width (number)
+
+From 4599f24987dc6ae223ad119035dd72380afc7fd8 Mon Sep 17 00:00:00 2001
+From: ericoporto <ericoporto2008@gmail.com>
+Date: Thu, 10 Jan 2019 22:09:40 -0200
+Subject: [PATCH 10/12] fix colors to be 0-1 instead of 0-255, because of love
+ 11 change.
+
+https://love2d.org/wiki/love.graphics.setColor
+"In versions prior to 11.0, color component values were within the range of 0 to 255 instead of 0 to 1."
+---
+ project/src/entities/Character.lua    |  2 +-
+ project/src/entities/ScreenButton.lua | 14 +++++++-------
+ project/src/states/Game.lua           |  2 +-
+ project/src/states/StartScreen.lua    | 10 +++++-----
+ 4 files changed, 14 insertions(+), 14 deletions(-)
+
+diff --git a/project/src/entities/Character.lua b/project/src/entities/Character.lua
+index 6b7c5c1..1d07613 100644
+--- a/project/src/entities/Character.lua
++++ b/project/src/entities/Character.lua
+@@ -19,7 +19,7 @@ function Character.init(name,type,image,x,y, physicWorld ,animTime)
+ 
+ 
+     chara.animTime = animTime and animTime or 0.1
+-    chara.color = {255, 255, 255, 255}
++    chara.color = {255/255, 255/255, 255/255, 255}
+     chara.sprite = love.graphics.newImage(image)
+     chara.anim_grid = anim8.newGrid(24, 24, chara.sprite:getWidth(), chara.sprite:getHeight())
+     chara.current_direction = 'down'
+diff --git a/project/src/entities/ScreenButton.lua b/project/src/entities/ScreenButton.lua
+index f3298a9..2cace5e 100644
+--- a/project/src/entities/ScreenButton.lua
++++ b/project/src/entities/ScreenButton.lua
+@@ -17,14 +17,14 @@ ScreenButton = Class{
+       ini_x = 48,
+       ini_y = 132,
+       deadzone = 7,
+-      color = {255,255,255,255},
++      color = {255/255,255/255,255/255,255},
+     }
+ 
+     self.buttonA = {
+       r = 28,
+       x = 266,
+       y = 140,
+-      color = {255,255,255,255},
++      color = {255/255,255/255,255/255,255},
+     }
+ 
+     self.touchpos = {
+@@ -98,13 +98,13 @@ ScreenButton = Class{
+     -- resets everything first
+     self.touchpos.x = self.joy.x
+     self.touchpos.y = self.joy.y
+-    self.joy.color = {128,128,128,64}
++    self.joy.color = {128/255,128/255,128/255,64}
+     self.pressed.up = nil
+     self.pressed.down = nil
+     self.pressed.right = nil
+     self.pressed.left = nil
+     self.pressed.buttona = nil
+-    self.buttonA.color = {128,128,128,64}
++    self.buttonA.color = {128/255,128/255,128/255,64}
+ 
+     -- when the player presses A, the directional must keep working
+     -- so for multitouch, we need this for to see every place being touched
+@@ -115,7 +115,7 @@ ScreenButton = Class{
+ 
+       if (self.joy.x-sx)^2 + (self.joy.y-sy)^2 < 3*(self.joy.r^2) then
+         
+-        self.joy.color = {255,128,255,255}
++        self.joy.color = {255/255,128/255,255/255,255}
+ 
+ 
+         if(sx < self.joy.x-self.joy.deadzone ) then
+@@ -180,7 +180,7 @@ ScreenButton = Class{
+       -- the accept button is much simpler, we just check for fingers in it's area
+       if (self.buttonA.x-sx)^2 + (self.buttonA.y-sy)^2 < 2*(self.buttonA.r^2) then
+         self.pressed.buttona = true
+-        self.buttonA.color = {255,128,255,255}
++        self.buttonA.color = {255/255,128/255,255/255,255}
+       end
+ 
+     end
+@@ -202,7 +202,7 @@ ScreenButton = Class{
+     love.graphics.setColor(self.buttonA.color)
+     love.graphics.circle('fill',self.buttonA.x,self.buttonA.y,self.buttonA.r)
+ 
+-    love.graphics.setColor(244,244,255,64)
++    love.graphics.setColor(244/255,244/255,255/255,64)
+     love.graphics.circle('fill',self.touchpos.x,self.touchpos.y,self.joy.r/1.5)
+   end
+ }
+diff --git a/project/src/states/Game.lua b/project/src/states/Game.lua
+index 2e51032..bb43522 100644
+--- a/project/src/states/Game.lua
++++ b/project/src/states/Game.lua
+@@ -327,7 +327,7 @@ local function initializePlayerCharacter(spawnX,spawnY)
+               -- ideally, the enemy sprites should be 'tackled' away from player on hit
+               -- I don't know how to do this in a nice way
+               sprite_list[k].body:setLinearDamping(30)
+-              sprite_list[k].color = {255,128,128,255}
++              sprite_list[k].color = {255/255,128/255,128/255,255}
+               sprite_list[k].body:applyLinearImpulse(lume.clamp(sniper_kill_ray^2/(2*(v.pos.x-player.pos.x)),-2000, 2000),
+                                                      lume.clamp(sniper_kill_ray^2/(2*(v.pos.y-player.pos.y)),-2000, 2000))
+ 
+diff --git a/project/src/states/StartScreen.lua b/project/src/states/StartScreen.lua
+index 51b9a6d..df23441 100644
+--- a/project/src/states/StartScreen.lua
++++ b/project/src/states/StartScreen.lua
+@@ -136,7 +136,7 @@ local function drawFn2()
+     love.graphics.setShader()
+     cnv = love.graphics.newCanvas(GAME_WIDTH,GAME_HEIGHT)
+     cnv:renderTo(function()
+-      love.graphics.setColor(255,255,255,opacityTween)
++      love.graphics.setColor(255/255,255/255,255/255,opacityTween)
+       if opacityTween<256-opacity_step then
+         love.graphics.draw(Image.logo)
+       else
+@@ -146,20 +146,20 @@ local function drawFn2()
+         local txt_x = 96
+         local txt_y = 64
+         local txt_y2 = txt_y+12
+-        love.graphics.setColor(12,158,100,196)
++        love.graphics.setColor(12/255,158/255,100/255,196)
+         love.graphics.print('> Hello, Susan ',txt_x,txt_y-12)
+         love.graphics.print('Controls: WASD+K',96,128)
+         for k,v in pairs(menu_entries) do
+-          love.graphics.setColor(12,158,100,196)
++          love.graphics.setColor(12/255,158/255,100/255,196)
+           love.graphics.print(menu_entries[k],txt_x,txt_y-12+12*k)
+           if(k==selected) then
+-            love.graphics.setColor(255,255,255,128)
++            love.graphics.setColor(255/255,255/255,255/255,128)
+             love.graphics.print(menu_entries[k],txt_x,txt_y-12+12*k)
+           end
+         end
+ 
+ 
+-        love.graphics.setColor(12,24,48,128)
++        love.graphics.setColor(12/255,24/255,48/255,128)
+         love.graphics.print('v' .. GAME_VERSION,282,4)
+         scrBtn:draw()
+       end
+
+From 1c3b38b79f99b77261c0ae6df85a39eac70f52be Mon Sep 17 00:00:00 2001
+From: ericoporto <ericoporto2008@gmail.com>
+Date: Fri, 11 Jan 2019 21:30:06 -0200
+Subject: [PATCH 12/12] now handles window resize. `conf.lua` updated to
+ latest. Terebi updated to latest.
+
+---
+ project/conf.lua        | 68 +++++++++++++++++++++++++++------------
+ project/libs/terebi.lua | 71 +++++++++++++++++++++++++++--------------
+ project/main.lua        |  5 +++
+ 3 files changed, 100 insertions(+), 44 deletions(-)
+
+diff --git a/project/conf.lua b/project/conf.lua
+index 65ccc22..12a5b2d 100644
+--- a/project/conf.lua
++++ b/project/conf.lua
+@@ -1,21 +1,49 @@
+ function love.conf(t)
+-    t.title = "CodenameLT"        -- The title of the window the game is in (string)
+-    t.author = "VACAROXA"      -- The author of the game (string)
+-    t.url = nil                 -- The website of the game (string)
+-    t.identity = nil            -- The name of the save directory (string)
+-    t.version = "11.2"         -- The LÖVE version this game was made for (string)
+-    t.console = false           -- Attach a console (boolean, Windows only)
+-    t.release = false           -- Enable release mode (boolean)
+-    t.window.width = 800        -- The window width (number)
+-    t.window.height = 600       -- The window height (number)
+-    t.modules.joystick = true   -- Enable the joystick module (boolean)
+-    t.modules.audio = true      -- Enable the audio module (boolean)
+-    t.modules.keyboard = true   -- Enable the keyboard module (boolean)
+-    t.modules.event = true      -- Enable the event module (boolean)
+-    t.modules.image = true      -- Enable the image module (boolean)
+-    t.modules.graphics = true   -- Enable the graphics module (boolean)
+-    t.modules.timer = true      -- Enable the timer module (boolean)
+-    t.modules.mouse = true      -- Enable the mouse module (boolean)
+-    t.modules.sound = true      -- Enable the sound module (boolean)
+-    t.modules.physics = true    -- Enable the physics module (boolean)
+-end
++    t.identity = nil                    -- The name of the save directory (string)
++    t.appendidentity = false            -- Search files in source directory before save directory (boolean)
++    t.version = "11.2"                  -- The LÖVE version this game was made for (string)
++    t.console = false                   -- Attach a console (boolean, Windows only)
++    t.accelerometerjoystick = false     -- Enable the accelerometer on iOS and Android by exposing it as a Joystick (boolean)
++    t.externalstorage = false           -- True to save files (and read from the save directory) in external storage on Android (boolean)
++    t.gammacorrect = false              -- Enable gamma-correct rendering, when supported by the system (boolean)
++
++    t.audio.mixwithsystem = true        -- Keep background music playing when opening LOVE (boolean, iOS and Android only)
++
++    t.window.title = "CodenameLT"         -- The window title (string)
++    t.window.icon = nil                 -- Filepath to an image to use as the window's icon (string)
++    t.window.width = 800                -- The window width (number)
++    t.window.height = 600               -- The window height (number)
++    t.window.borderless = false         -- Remove all border visuals from the window (boolean)
++    t.window.resizable = true          -- Let the window be user-resizable (boolean)
++    t.window.minwidth = 1               -- Minimum window width if the window is resizable (number)
++    t.window.minheight = 1              -- Minimum window height if the window is resizable (number)
++    t.window.fullscreen = false         -- Enable fullscreen (boolean)
++    t.window.fullscreentype = "desktop" -- Choose between "desktop" fullscreen or "exclusive" fullscreen mode (string)
++    t.window.vsync = 1                  -- Vertical sync mode (number)
++    t.window.msaa = 0                   -- The number of samples to use with multi-sampled antialiasing (number)
++    t.window.depth = nil                -- The number of bits per sample in the depth buffer
++    t.window.stencil = nil              -- The number of bits per sample in the stencil buffer
++    t.window.display = 1                -- Index of the monitor to show the window in (number)
++    t.window.highdpi = false            -- Enable high-dpi mode for the window on a Retina display (boolean)
++    t.window.x = nil                    -- The x-coordinate of the window's position in the specified display (number)
++    t.window.y = nil                    -- The y-coordinate of the window's position in the specified display (number)
++
++    t.modules.audio = true              -- Enable the audio module (boolean)
++    t.modules.data = true               -- Enable the data module (boolean)
++    t.modules.event = true              -- Enable the event module (boolean)
++    t.modules.font = true               -- Enable the font module (boolean)
++    t.modules.graphics = true           -- Enable the graphics module (boolean)
++    t.modules.image = true              -- Enable the image module (boolean)
++    t.modules.joystick = true           -- Enable the joystick module (boolean)
++    t.modules.keyboard = true           -- Enable the keyboard module (boolean)
++    t.modules.math = true               -- Enable the math module (boolean)
++    t.modules.mouse = true              -- Enable the mouse module (boolean)
++    t.modules.physics = true            -- Enable the physics module (boolean)
++    t.modules.sound = true              -- Enable the sound module (boolean)
++    t.modules.system = true             -- Enable the system module (boolean)
++    t.modules.thread = true             -- Enable the thread module (boolean)
++    t.modules.timer = true              -- Enable the timer module (boolean), Disabling it will result 0 delta time in love.update
++    t.modules.touch = true              -- Enable the touch module (boolean)
++    t.modules.video = true              -- Enable the video module (boolean)
++    t.modules.window = true             -- Enable the window module (boolean)
++end
+\ No newline at end of file
+diff --git a/project/libs/terebi.lua b/project/libs/terebi.lua
+index 8a0a4a1..fa20ec1 100644
+--- a/project/libs/terebi.lua
++++ b/project/libs/terebi.lua
+@@ -1,5 +1,5 @@
+ local Terebi = {
+-  _VERSION     = 'terebi v0.4.0',
++  _VERSION     = 'terebi v1.0.0',
+   _URL         = 'https://github.com/oniietzschan/terebi',
+   _DESCRIPTION = 'Graphics scaling library for Love2D.',
+   _LICENSE     = [[
+@@ -45,17 +45,28 @@ function Terebi.newScreen(...)
+ end
+ 
+ function Screen:initialize(width, height, scale)
++  assert(type(scale) == 'number')
++
++  return self
++    :setBackgroundColor(0, 0, 0)
++    :setDimensions(width, height, scale)
++end
++
++function Screen:getDimensions()
++  return self._width, self._height
++end
++
++function Screen:setDimensions(width, height, scale, isSkipWindowResize)
+   assert(type(width) == 'number')
+   assert(type(height) == 'number')
+-  assert(type(scale) == 'number')
++  scale = scale or self._scale
+ 
+   self._width = width
+   self._height = height
+   self._canvas = love.graphics.newCanvas(width, height)
+ 
+   return self
+-    :setBackgroundColor(0, 0, 0)
+-    :setScale(scale)
++    :setScale(scale, isSkipWindowResize)
+     :_saveScale()
+ end
+ 
+@@ -73,14 +84,15 @@ function Screen:getScale()
+   return self._scale
+ end
+ 
+-function Screen:setScale(scale)
++function Screen:setScale(scale, isSkipWindowResize)
+   assert(type(scale) == 'number')
+ 
+   self._scale = math.floor(math.max(1, math.min(scale, self:_getMaxScale())))
+ 
+-  return self
+-    :_resizeWindow()
+-    :_updateDrawOffset()
++  if isSkipWindowResize ~= true then
++    self:_resizeWindow()
++  end
++  return self:_updateDrawOffset()
+ end
+ 
+ function Screen:_resizeWindow()
+@@ -103,15 +115,15 @@ function Screen:_restoreScale()
+   return self:setScale(self._savedScale)
+ end
+ 
+-function Screen:increaseScale()
++function Screen:increaseScale(isSkipWindowResize)
+   return self
+-    :setScale(self._scale + 1)
++    :setScale(self._scale + 1, isSkipWindowResize)
+     :_saveScale()
+ end
+ 
+-function Screen:decreaseScale()
++function Screen:decreaseScale(isSkipWindowResize)
+   return self
+-    :setScale(self._scale - 1)
++    :setScale(self._scale - 1, isSkipWindowResize)
+     :_saveScale()
+ end
+ 
+@@ -143,19 +155,30 @@ function Screen:_getMaxScale()
+   return math.min(maxScaleX, maxScaleY)
+ end
+ 
+-function Screen:_updateDrawOffset()
+-  if love.window.getFullscreen() then
+-    -- When fullscreen, center screen on monitor
+-    local desktopW, desktopH = self:_getDesktopDimensions()
+-    local scaledWidth  = self._width * self._scale
+-    local scaledHeight = self._height * self._scale
+-    self._drawOffsetX = math.floor((desktopW - scaledWidth) / 2)
+-    self._drawOffsetY = math.floor((desktopH - scaledHeight) / 2)
++function Screen:handleResize()
++  return self
++    :setScale(self:_getMaxScaleForWindow(), true)
++    :_updateDrawOffset()
++end
+ 
+-  else
+-    self._drawOffsetX = 0
+-    self._drawOffsetY = 0
+-  end
++function Screen:_getMaxScaleForWindow()
++  local w, h = love.window.getMode()
++  return self:_getMaxScaleForDimensions(w, h)
++end
++
++function Screen:_getMaxScaleForDimensions(w, h)
++  local maxScaleX = math.floor(w / self._width)
++  local maxScaleY = math.floor(h / self._height)
++
++  return math.min(maxScaleX, maxScaleY)
++end
++
++function Screen:_updateDrawOffset()
++  local w, h = love.window.getMode()
++  local scaledWidth  = self._width * self._scale
++  local scaledHeight = self._height * self._scale
++  self._drawOffsetX = math.floor((w - scaledWidth) / 2)
++  self._drawOffsetY = math.floor((h - scaledHeight) / 2)
+ 
+   return self
+ end
+diff --git a/project/main.lua b/project/main.lua
+index a545c6a..b388182 100644
+--- a/project/main.lua
++++ b/project/main.lua
+@@ -536,5 +536,10 @@ function love.joystickreleased(joystick, btn)
+ 	
+ end
+ 
++-- when window is resized, use terebi to handle resize
++function love.resize(w, h)
++	screen:handleResize()
++end
++
+ -- Get console output working with sublime text
+ io.stdout:setvbuf("no")
