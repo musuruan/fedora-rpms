@@ -1,0 +1,51 @@
+From c7497e543301e405613d28cd58942532635ea441 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Carl-Henrik=20Sk=C3=A5rstedt?= <cskarstedt@gmail.com>
+Date: Fri, 29 Dec 2023 13:12:17 +0100
+Subject: [PATCH] VICE executable path without .exe for non-windows, more
+ reliable file selection
+
+---
+ src/FileDialog.cpp      |  6 +++++-
+ src/views/FilesView.cpp | 12 ++++++++++--
+ 2 files changed, 15 insertions(+), 3 deletions(-)
+
+diff --git a/src/FileDialog.cpp b/src/FileDialog.cpp
+index 024ad1f..c1d05a8 100644
+--- a/src/FileDialog.cpp
++++ b/src/FileDialog.cpp
+@@ -68,7 +68,11 @@ static const char sLoadListingParams[] = "Listing:*.lst";
+ static const char sLoadKickDbgParams[] = "Kick Asm Debug:*.dbg";
+ static const char sLoadSymbolsParams[] = "Symbols:*.sym";
+ static const char sLoadViceCmdParams[] = "Vice Commands:*.vs";
+-static const char sViceEXEParams[] = "Vice EXE path:x*.exe";
++#ifdef _WIN32
++static const char sViceEXEParams[] = "Vice EXE path:x128*.exe,x64*.exe,xcbm*.exe,xpet*.exe,xplus4*.exe,xscpu64*.exe,xvic*.exe";
++#else
++static const char sViceEXEParams[] = "Vice EXE path:x128*,x64*,xcbm*,xpet*,xplus4*,xscpu64*,xvic*";
++#endif
+ static const char sReadPrgParams[] = "Prg files:*.prg";
+ static const char sThemeParams[] = "Theme:*.theme.txt";
+ #endif
+diff --git a/src/views/FilesView.cpp b/src/views/FilesView.cpp
+index 79c227c..490d088 100644
+--- a/src/views/FilesView.cpp
++++ b/src/views/FilesView.cpp
+@@ -280,8 +280,16 @@ void FVFileList::ReadDir(const char* full_path, const char* file_filter)
+ 			info.fileType = FVFileInfo::dir;
+ 		} else {
+ 			// check against filter
+-			if(filter && !CheckFileFilter(strref(ffd.cFileName), strref(filter))) {
+-				continue;
++			if(filter && filter[0]) {
++				strref filter_str(filter);
++				bool match = false;
++				while(strref filter_seg = filter_str.split_token(',')) {
++					if(CheckFileFilter(strref(ffd.cFileName), filter_seg)) {
++						match = true;
++						break;
++					}
++				}
++				if(!match) { continue; }
+ 			}
+ 			info.name = _strdup(ffd.cFileName);
+ 			info.size = (uint64_t)ffd.nFileSizeLow + (((uint64_t)ffd.nFileSizeHigh)<<32);

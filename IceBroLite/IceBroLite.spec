@@ -1,6 +1,6 @@
 Name:           IceBroLite
 Version:        1.18
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        External Debugger for VICE 3.5 and higher
 
 # TODO: clarify license
@@ -8,7 +8,12 @@ License:        unknown
 URL:            https://github.com/Sakrac/IceBroLite
 Source0:        %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        %{name}.desktop
+# Fix format security issues
+# https://github.com/Sakrac/IceBroLite/pull/47
 Patch0:         %{name}-1.18-fmt_string.patch
+# VICE executable selector is Windows only
+# https://github.com/Sakrac/IceBroLite/issues/48
+Patch1:         %{name}-1.18-vice_file_selector.patch
 
 BuildRequires:  make
 BuildRequires:  gcc-g++
@@ -20,7 +25,7 @@ Requires:       hicolor-icon-theme
 
 # imgui is not yet packaged
 # https://github.com/ocornut/imgui/
-Provides:       bundled(imgui)
+Provides:       bundled(imgui) = 1.89.2
 
 %description
 IceBro Lite is a source-level debugger with a graphical user interface (GUI).
@@ -78,6 +83,9 @@ convert -resize 48x48 \
 
 
 %changelog
+* Fri Dec 29 2023 Andrea Musuruane <musuruan@gmail.com> - 1.18-2
+- Fix VICE executable selector
+
 * Sun Dec 24 2023 Andrea Musuruane <musuruan@gmail.com> - 1.18-1
 - Updated to new upstream release
 
