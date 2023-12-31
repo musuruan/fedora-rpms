@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Crates
+Comment=3D puzzle game
+Exec=crates
+Icon=crates
+Terminal=false
+Type=Application
+Categories=Game;LogicGame;

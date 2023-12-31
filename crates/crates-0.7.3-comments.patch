@@ -1,0 +1,12 @@
+diff -durN crates-0.7.3.orig/src/ostate.c crates-0.7.3/src/ostate.c
+--- crates-0.7.3.orig/src/ostate.c	2020-10-15 23:11:41.000000000 +0200
++++ crates-0.7.3/src/ostate.c	2023-12-31 12:45:40.670567857 +0100
+@@ -82,7 +82,7 @@
+   {
+     if (!isplayer)
+     {
+-      optrvector_pushback(state->entities, 0); // Leave space for player.
++      optrvector_pushback(state->entities, 0); /* Leave space for player. */
+     }
+   }
+ 

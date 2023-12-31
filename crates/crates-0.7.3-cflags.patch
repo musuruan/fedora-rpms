@@ -1,0 +1,29 @@
+diff -durN crates-0.7.1.orig/CMakeLists.txt crates-0.7.1/CMakeLists.txt
+--- crates-0.7.1.orig/CMakeLists.txt	2010-03-10 13:52:15.000000000 +0100
++++ crates-0.7.1/CMakeLists.txt	2013-10-24 18:01:23.183797406 +0200
+@@ -35,9 +35,9 @@
+ 
+ cmake_minimum_required (VERSION 2.6)
+ project (crates C)
+-set (CMAKE_C_FLAGS "-Wall -ansi -pedantic")
+-set (CMAKE_C_FLAGS_DEBUG "-g -Wall -ansi -pedantic")
+-set (MAKE_C_FLAGS_RELEASE  "-Wall -O3")
++set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -ansi -pedantic")
++set (CMAKE_C_FLAGS_DEBUG "-g")
++set (CMAKE_C_FLAGS_RELEASE "-O2")
+ configure_file ("${PROJECT_SOURCE_DIR}/src/oconfig.h.in" "${PROJECT_SOURCE_DIR}/src/oconfig.h")
+ include_directories ("${PROJECT_BINARY_DIR}")
+ 
+@@ -75,12 +75,6 @@
+ 
+ FILE (GLOB COMMONFILES ${CMAKE_SOURCE_DIR}/src/*.[ch])
+ 
+-# These compiler flags are set here again because we do not want "-ansi -pedantic" to
+-# the CFLAGS when the platform specific code in the subdirectories of src is compiled.
+-set (CMAKE_C_FLAGS "-Wall")
+-set (CMAKE_C_FLAGS_DEBUG "-g -Wall")
+-set (MAKE_C_FLAGS_RELEASE  "-Wall -O3")
+-
+ if ("${CMAKE_SYSTEM_NAME}" MATCHES "Linux")
+   add_executable(crates ${COMMONFILES} src/posix/odir.c  src/posix/otimer.c  src/posix/linux/oexedirname.c)
+ elseif ("${CMAKE_SYSTEM_NAME}" MATCHES "Darwin")
