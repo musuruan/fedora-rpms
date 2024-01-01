@@ -1,4 +1,5 @@
 *.tgz
 *.tar.gz
+*.tar.bz2
 *.zip
 *.src.rpm
