@@ -1,0 +1,12 @@
+diff -durN f1spirit-0.rc9.1615.orig/sources/auxiliar.cpp f1spirit-0.rc9.1615/sources/auxiliar.cpp
+--- f1spirit-0.rc9.1615.orig/sources/auxiliar.cpp	2009-02-06 10:54:49.000000000 +0100
++++ f1spirit-0.rc9.1615/sources/auxiliar.cpp	2024-01-04 11:51:07.130279263 +0100
+@@ -93,7 +93,7 @@
+ 
+ 	if (tmp == 0 ||
+ 	        mask == 0)
+-		return false;
++		return NULL;
+ 
+ 	res = SDL_DisplayFormatAlpha(tmp);
+ 

@@ -1,0 +1,76 @@
+diff -durN f1spirit-0.rc9.1615.orig/build/linux/Makefile f1spirit-0.rc9.1615/build/linux/Makefile
+--- f1spirit-0.rc9.1615.orig/build/linux/Makefile	2009-02-06 11:12:51.000000000 +0100
++++ f1spirit-0.rc9.1615/build/linux/Makefile	2013-05-23 11:16:56.463311220 +0200
+@@ -3,13 +3,14 @@
+ PREFIX = /usr
+ EXTRADIR = ./build/linux
+ 
+-GAMEDIR = $(PREFIX)/games
++GAMEDIR = $(DESTDIR)/$(PREFIX)/bin
+ STARTUP = $(GAMEDIR)/$(EXE)
+-BINDIR = $(PREFIX)/share/games/$(EXE)
+-ICNDIR = $(PREFIX)/share/pixmaps
+-APPDIR = $(PREFIX)/share/applications
++BINDIR = $(DESTDIR)/$(PREFIX)/libexec/$(EXE)
++ICNDIR = $(DESTDIR)/$(PREFIX)/share/pixmaps
++APPDIR = $(DESTDIR)/$(PREFIX)/share/applications
++DATADIR = $(DESTDIR)/$(PREFIX)/share/$(EXE)
+ 
+-DATA = demos graphics tracks sound readme.txt
++DATA = demos graphics tracks sound
+ ICON = f1spirit.png
+ DESKTOP = f1spirit.desktop
+ 
+@@ -40,8 +41,9 @@
+ 
+ CC = gcc
+ #CFLAGS = -g3 -O3 -Wall `sdl-config --cflags` `curl-config --cflags` -I/usr/X11R6/include
+-CFLAGS = -g3 -O3 -Wno-write-strings `sdl-config --cflags` `curl-config --cflags` -I/usr/X11R6/include
+-LDFLAGS = `sdl-config --libs` `curl-config --libs` -L/usr/X11R6/lib/ -lSDL_image -lSDL_mixer -lSDL_net -lGL -lGLU
++CFLAGS += `sdl-config --cflags` `curl-config --cflags` -I/usr/X11R6/include
++LDFLAGS += -L/usr/X11R6/lib/
++LIBS = `sdl-config --libs` `curl-config --libs` -lSDL_image -lSDL_mixer -lSDL_net -lGL -lGLU -lstdc++ -lm
+ RM = rm -f
+ CP = cp -r
+ MD = mkdir -p
+@@ -55,8 +57,7 @@
+ 	$(CC) $(CFLAGS) -c $< -o $@
+ 
+ $(EXE): $(OBJS)
+-	$(CC) $(LDFLAGS) $^ -o $@
+-	@$(STRIP) $@
++	$(CC) $(LDFLAGS) $^ -o $@ $(LIBS)
+ 	@$(ECHO) " o If there are no errors, the game compiled succesfully"
+ 
+ clean:
+@@ -64,21 +65,24 @@
+ 	@$(RM) $(SRC)/*.o $(SRC)/*.bak core $(EXE)
+ 
+ install: all
+-	@$(ECHO) " o Creating install directory $(BINDIR)"
++	@$(ECHO) " o Creating game directory $(BINDIR)"
+ 	@$(MD) "$(BINDIR)"
+ 	@$(ECHO) " o Installing game and data to $(BINDIR)"
+-	@$(CP) "$(EXE)" $(DATA) "$(BINDIR)"
++	@$(CP) -p "$(EXE)" "$(BINDIR)"
++	@$(ECHO) " o Creating data directory $(DATADIR)"
++	@$(MD) "$(DATADIR)"
++	@$(ECHO) " o Installing data to $(DATADIR)"
++	@$(CP) -p $(DATA) "$(DATADIR)"
+ 	@$(ECHO) " o Creating startup script $(STARTUP)"
+ 	@$(MD) "$(GAMEDIR)"
+ 	@$(ECHO) "#!/bin/sh" >"$(STARTUP)"
+-	@$(ECHO) "cd \"/usr/share/games/f1spirit/\"; ./$(EXE); cd -" >>"$(STARTUP)"
+-#	@$(ECHO) "cd \"$(BINDIR)\"; ./$(EXE); cd -" >>"$(STARTUP)"
++	@$(ECHO) "cd \"/usr/share/f1spirit\"; /usr/libexec/f1spirit/$(EXE); cd -" >>"$(STARTUP)"
+ 	@$(CHMOD) 755 "$(STARTUP)"
+ 	@$(ECHO) " o Creating application menu entry"
+ 	@$(MD) "$(ICNDIR)"
+-	@$(CP) "$(EXTRADIR)/$(ICON)" "$(ICNDIR)"
++	@$(CP) -p "$(EXTRADIR)/$(ICON)" "$(ICNDIR)"
+ 	@$(MD) "$(APPDIR)"
+-	@$(CP) "$(EXTRADIR)/$(DESKTOP)" "$(APPDIR)"
++	@$(CP) -p "$(EXTRADIR)/$(DESKTOP)" "$(APPDIR)"
+ 	@$(ECHO) ""
+ 
+ uninstall:

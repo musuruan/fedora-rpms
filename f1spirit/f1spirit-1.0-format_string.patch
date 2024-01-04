@@ -1,0 +1,33 @@
+diff -durN f1spirit-0.rc9.1615.orig/sources/debug.cpp f1spirit-0.rc9.1615/sources/debug.cpp
+--- f1spirit-0.rc9.1615.orig/sources/debug.cpp	2009-02-06 10:54:49.000000000 +0100
++++ f1spirit-0.rc9.1615/sources/debug.cpp	2024-01-04 12:09:14.808408289 +0100
+@@ -30,7 +30,7 @@
+ 	if (fp == 0)
+ 		fp = f1open("f1spirit.dbg", "w", USERDATA);
+ 
+-	fprintf(fp, text);
++	fprintf(fp, "%s", text);
+ 
+ 	fflush(fp);
+ } /* glprintf */
+diff -durN f1spirit-0.rc9.1615.orig/sources/state_menu_create_menu.cpp f1spirit-0.rc9.1615/sources/state_menu_create_menu.cpp
+--- f1spirit-0.rc9.1615.orig/sources/state_menu_create_menu.cpp	2009-02-06 10:54:49.000000000 +0100
++++ f1spirit-0.rc9.1615/sources/state_menu_create_menu.cpp	2024-01-04 12:10:22.802666300 +0100
+@@ -1604,7 +1604,7 @@
+ 				len = strlen(base1) + strlen(base2) + 1 + (32) * menu_available_servers.Length();
+ 				tmp = new char[len];
+ 
+-				sprintf(tmp, base1);
++				sprintf(tmp, "%s", base1);
+ 				l.Instance(menu_available_servers);
+ 				l.Rewind();
+ 
+@@ -1617,7 +1617,7 @@
+ 
+ 				i = strlen(tmp);
+ 
+-				sprintf(tmp + i, base2);
++				sprintf(tmp + i, "%s", base2);
+ 
+ 				menu_title[0] = new char[strlen("SERVER LIST") + 1];
+ 
