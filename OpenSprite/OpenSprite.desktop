@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=OpenSprite
+Exec=OpenSprite
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=OpenSprite
+Categories=Development;
