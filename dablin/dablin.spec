@@ -1,5 +1,5 @@
 Name:           dablin
-Version:        1.15.0
+Version:        1.16.0
 Release:        1%{?dist}
 Summary:        DAB/DAB+ receiver (including ETI-NI and EDI AF playback)
 
@@ -65,6 +65,9 @@ sed -i '/SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s")/d' \
 
 
 %changelog
+* Mon May 20 2024 Andrea Musuruane <musuruan@gmail.com> - 1.16.0-1
+- Update to new upstream version
+
 * Sat Aug 12 2023 Andrea Musuruane <musuruan@gmail.com> - 1.15.0-1
 - Update to new upstream version
 
