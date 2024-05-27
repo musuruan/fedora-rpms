@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+<id>whichwayisup.desktop</id>
+	<metadata_license>CC-BY-SA-3.0</metadata_license>
+	<project_license>GPLv2+</project_license>
+	<name>OpenTyrian</name>
+	<summary>An arcade-style vertical scrolling shooter</summary>
+	<description>
+		<p>
+			OpenTyrian is an arcade-style vertical scrolling shooter. The story is set in 20,031 where you play as Trent Hawkins, a skilled fighter-pilot employed to fight Microsol and save the galaxy.
+		</p>
+	</description>
+	<screenshots>
+		<screenshot type="default">
+			<image>https://bitbucket.org/opentyrian/opentyrian/wiki/opentyrian_torm.png</image>
+		</screenshot>
+	</screenshots>
+	<url type="homepage">https://bitbucket.org/opentyrian/opentyrian/wiki/Home</url>
+</component>
+
