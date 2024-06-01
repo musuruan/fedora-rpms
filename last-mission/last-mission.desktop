@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=The Last Mission
+Comment=A side-view arcade game
+Exec=last-mission-sdl
+Icon=last-mission
+Terminal=false
+Type=Application
+Categories=Game;ArcadeGame;
+
