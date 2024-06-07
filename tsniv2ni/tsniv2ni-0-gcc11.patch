@@ -1,0 +1,36 @@
+diff --git a/tsniv2ni.cpp b/tsniv2ni.cpp
+index b1c763f..c4370ce 100644
+--- a/tsniv2ni.cpp
++++ b/tsniv2ni.cpp
+@@ -25,7 +25,7 @@ using namespace std;
+ 
+ istream* inbuf;
+ ostream* outbuf;
+-int size;
++int tssize;
+ bool active=false;
+ const char fsync0[]="\xff\x07\x3a\xb6";
+ const char fsync1[]="\xff\xf8\xc5\x49";
+@@ -62,17 +62,17 @@ int main(int argc, char** argv) {
+ 	}
+ 	inbuf = &cin;
+ 	outbuf = &cout;
+-	size=200;
+-	char* packets= new char[size*188];
++	tssize=200;
++	char* packets= new char[tssize*188];
+ 	frpd= new char[6140];
+ 	memset(frpd,0x55,6140);
+ 	count=0;
+ 	while(1) {
+-		inbuf->read(packets,size * 188);
++		inbuf->read(packets,tssize * 188);
+ 		if(inbuf->fail()) break;
+ 		unsigned char *p;
+-		//outbuf->write(packets,size*188);
+-		for(int i=0; i<size*188;i+=188) {
++		//outbuf->write(packets,tssize*188);
++		for(int i=0; i<tssize*188;i+=188) {
+ 				int start=0;
+ 				/*if((((packets[i+3])&0xC0))!=0x00) {
+ 					std::cerr << "encrypted" << std::endl;	
