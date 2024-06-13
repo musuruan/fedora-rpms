@@ -1,8 +1,8 @@
-%global commit 784931acd78fc98953ad9d1671f1f6e932d5f823
+%global commit b0967158a99adb94e4a04299bf6853ae16ffe21e
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:           OpenSprite
-Version:        1.41
+Version:        1.42
 Release:        1%{?dist}
 Summary:        An open source sprite editor to generate sprites for the C64
 
@@ -57,6 +57,9 @@ install -p -m 0644 icons/opensprite96x96.png \
 
 
 %changelog
+* Thu Jun 13 2024 Andrea Musuruane <musuruan@gmail.com> - 1.42-1
+- Updated to new upstream release
+
 * Sun May 05 2024 Andrea Musuruane <musuruan@gmail.com> - 1.41-1
 - Updated to new upstream release
 
