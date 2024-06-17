@@ -1,5 +1,5 @@
 Name:           fvcbm
-Version:        3.1 
+Version:        3.2
 Release:        1%{?dist}
 Summary:        List directories of Commodore 64/128 compatible archive files
 
@@ -26,12 +26,8 @@ disk images (D64 and X64).
 %autosetup
 
 # Fix Makefile
-sed -i 's/$(CC) $(CFLAGS) -o/$(CC) $(CFLAGS) $(LDFLAGS) -o/' Makefile
-sed -i 's/$(BINDIR)/$(DESTDIR)$(BINDIR)/' Makefile
-sed -i 's/$(MANDIR)/$(DESTDIR)$(MANDIR)/' Makefile
-sed -i 's/-o root -g bin//' Makefile
-sed -i 's/-o root -g root//' Makefile
-
+sed -i 's/-o root -g bin fvcbm $(BINDIR)/fvcbm $(DESTDIR)$(BINDIR)/' Makefile
+sed -i 's/-o root -g root fvcbm.1 $(MANDIR)/fvcbm.1 $(DESTDIR)$(MANDIR)/' Makefile
 
 
 %build
@@ -53,5 +49,8 @@ install -d %{buildroot}%{_mandir}/man1
 
 
 %changelog
+* Mon Jun 17 2024 Andrea Musuruane <musuruan@gmail.com> - 3.2-1
+- Updated to new upstream release
+
 * Sat Dec 23 2023 Andrea Musuruane <musuruan@gmail.com> - 3.1-1
 - First release
