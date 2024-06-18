@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=Hydra Castle Labyrinth
-Comment=Regain the crown stolen by the snake god Hydra!
-Exec=hydracastlelabyrinth
-Icon=hydracastlelabyrinth
-Terminal=false
-Type=Application
-Categories=Game;ActionGame;
