@@ -2,7 +2,7 @@
 
 Name:           spacecadetpinball
 Version:        2.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        3D Pinball
 
 License:        MIT
@@ -13,6 +13,9 @@ BuildRequires:  gcc-g++
 BuildRequires:  cmake
 BuildRequires:  SDL2-devel
 BuildRequires:  SDL2_mixer-devel
+BuildRequires:  libappstream-glib
+BuildRequires:  desktop-file-utils
+Requires:       hicolor-icon-theme
 
 %description
 Reverse engineering of '3D Pinball for Windows - Space Cadet', a game bundled
@@ -47,6 +50,14 @@ in $XDG_DATA_HOME/SpaceCadetPinball (usually:
 ~/.local/share/SpaceCadetPinball/)
 EOF
 
+# Validate desktop file
+desktop-file-validate \
+  %{buildroot}%{_datadir}/applications/SpaceCadetPinball.desktop
+
+# Validate AppData file
+appstream-util validate-relax --nonet \
+  %{buildroot}%{_metainfodir}/SpaceCadetPinball.metainfo.xml
+
 
 %files
 %license LICENSE
@@ -54,10 +65,13 @@ EOF
 %{_bindir}/SpaceCadetPinball
 %{_datadir}/applications/SpaceCadetPinball.desktop
 %{_datadir}/icons/hicolor/*/apps/SpaceCadetPinball.png
-%{_datadir}/metainfo/SpaceCadetPinball.metainfo.xml
+%{_metainfodir}/SpaceCadetPinball.metainfo.xml
 
 
 %changelog
+* Tue Jun 18 2024 Andrea Musuruane <musuruan@gmail.com> - 2.1.0-2
+- Added desktop file and AppData file validation
+
 * Mon Jun 17 2024 Andrea Musuruane <musuruan@gmail.com> - 2.1.0-1
 - Updated to new upstream release
 
