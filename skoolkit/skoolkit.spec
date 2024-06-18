@@ -1,13 +1,12 @@
 Name:           skoolkit
-Version:        9.1
+Version:        9.2
 Release:        1%{?dist}
 Summary:        Tools for creating disassemblies of ZX Spectrum programs
-License:        GPLv3+
+License:        GPL-3.0-or-later
 URL:            https://skoolkit.ca
 Source0:        https://skoolkit.ca/downloads/%{name}/%{name}-%{version}.tar.xz
 
-BuildArch:      noarch
-
+BuildRequires:  gcc
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 
@@ -50,10 +49,13 @@ cp -a examples %{buildroot}%{_datadir}/%{name}
 %{_bindir}/*
 %{_mandir}/man1/*.1*
 %{_datadir}/%{name}/*
-%{python3_sitelib}/%{name}
-%{python3_sitelib}/%{name}-*.egg-info
+%{python3_sitearch}/%{name}
+%{python3_sitearch}/%{name}-*.egg-info
 
 
 %changelog
+* Mon Jun 17 2024 Andrea Musuruane <musuruan@gmail.com> - 9.2-1
+- Updated to new upstream release
+
 * Sat Mar 02 2024 Andrea Musuruane <musuruan@gmail.com> 9.1-1
 - First release
