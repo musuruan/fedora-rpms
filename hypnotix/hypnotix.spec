@@ -1,10 +1,10 @@
 Name:           hypnotix
-Version:        4.3
+Version:        4.4
 Release:        1%{?dist}
 Summary:        An M3U IPTV Player
 
 # Icons on the landing page: CC BY-ND 2.0
-License:        GPLv3+ and CC-BY-ND
+License:        GPL-3.0-or-later and CC-BY-ND-2.0
 URL:            https://github.com/linuxmint/hypnotix
 Source0:        %{url}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
@@ -67,6 +67,9 @@ desktop-file-validate \
 
 
 %changelog
+* Tue Jun 18 2024 Andrea Musuruane <musuruan@gmail.com> - 4.4-1
+- Updated to new upstream release
+
 * Tue Feb 06 2024 Andrea Musuruane <musuruan@gmail.com> - 4.3-1
 - Updated to new upstream release
 
