@@ -1,0 +1,19 @@
+From b875cd79104217af581131b22f4111409273617a Mon Sep 17 00:00:00 2001
+From: a dinosaur <dino@a-dinosaur.com>
+Date: Tue, 9 Jan 2024 17:03:30 +1100
+Subject: [PATCH] Fix missing string.h include in cartridge.c
+
+---
+ cartridge.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/cartridge.c b/cartridge.c
+index e2af941..23f6558 100644
+--- a/cartridge.c
++++ b/cartridge.c
+@@ -1,4 +1,5 @@
+ #include <stdio.h>
++#include <string.h>
+ #include "cartridge.h"
+ #include "fc1004.h"
+ 
