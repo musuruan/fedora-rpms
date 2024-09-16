@@ -1,5 +1,5 @@
 Name:           cbmconvert
-Version:        2.1.5
+Version:        2.1.6
 Release:        1%{?dist}
 Summary:        Create, extract and convert 8-bit Commodore binary archives
 
@@ -44,6 +44,9 @@ formats, including some formats used by some emulators.
 
 
 %changelog
+* Mon Sep 16 2024 Andrea Musuruane <musuruan@gmail.com> - 2.1.6-1
+- Update to new upstream realese
+
 * Thu Dec 21 2023 Andrea Musuruane <musuruan@gmail.com> - 2.1.5-1
 - Update to new upstream realese
 
