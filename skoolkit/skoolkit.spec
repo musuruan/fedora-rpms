@@ -1,5 +1,5 @@
 Name:           skoolkit
-Version:        9.2
+Version:        9.4
 Release:        1%{?dist}
 Summary:        Tools for creating disassemblies of ZX Spectrum programs
 License:        GPL-3.0-or-later
@@ -54,6 +54,9 @@ cp -a examples %{buildroot}%{_datadir}/%{name}
 
 
 %changelog
+* Mon Nov 04 2024 Andrea Musuruane <musuruan@gmail.com> - 9.4-1
+- Updated to new upstream release
+
 * Mon Jun 17 2024 Andrea Musuruane <musuruan@gmail.com> - 9.2-1
 - Updated to new upstream release
 
