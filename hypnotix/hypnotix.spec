@@ -1,5 +1,5 @@
 Name:           hypnotix
-Version:        4.4
+Version:        4.6
 Release:        1%{?dist}
 Summary:        An M3U IPTV Player
 
@@ -67,6 +67,9 @@ desktop-file-validate \
 
 
 %changelog
+* Thu Nov 07 2024 Andrea Musuruane <musuruan@gmail.com> - 4.6-1
+- Updated to new upstream release
+
 * Tue Jun 18 2024 Andrea Musuruane <musuruan@gmail.com> - 4.4-1
 - Updated to new upstream release
 
