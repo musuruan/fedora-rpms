@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Spelunky Classic
+Comment=A platform game with randomized levels
+Exec=Spelunky_PSP
+Icon=spelunky-psp
+Terminal=false
+Type=Application
+Categories=Game;ArcadeGame;
+
