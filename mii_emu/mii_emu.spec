@@ -1,5 +1,5 @@
 Name:           mii_emu
-Version:        1.96
+Version:        1.97
 Release:        1%{?dist}
 Summary:        MII Apple //e Emulator
 
@@ -85,5 +85,8 @@ install -p -m 644 contrib/mii-icon-64.png \
 
 
 %changelog
+* Thu May 15 2025 Andrea Musuruane <musuruan@gmail.com> - 1.97-1
+- Updated to new upstream release
+
 * Mon Nov 04 2024 Andrea Musuruane <musuruan@gmail.com> - 1.96-1
 - First release
