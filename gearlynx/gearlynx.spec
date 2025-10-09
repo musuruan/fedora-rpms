@@ -1,5 +1,5 @@
 Name:           gearlynx
-Version:        0.0.5
+Version:        0.0.7
 Release:        1%{?dist}
 Summary:        Atari Lynx emulator and debugger
 
@@ -61,6 +61,9 @@ desktop-file-install \
 
 
 %changelog
+* Thu Oct 09 2025 Andrea Musuruane <musuruan@gmail.com> - 0.0.7-1
+- Updated to new upstream release
+
 * Sat Oct 04 2025 Andrea Musuruane <musuruan@gmail.com> - 0.0.5-1
 - First release
  
