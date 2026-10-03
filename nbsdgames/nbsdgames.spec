@@ -27,8 +27,8 @@ everyone.
 
 
 %install
-make nbinstall DESTDIR=/builddir/build/BUILD/nbsdgames-6.0.2-build/BUILDROOT 'INSTALL=/usr/bin/install -p'
-make nbmanpages DESTDIR=/builddir/build/BUILD/nbsdgames-6.0.2-build/BUILDROOT 'INSTALL=/usr/bin/install -p'
+make nbinstall DESTDIR=%{buildroot} 'INSTALL=/usr/bin/install -p'
+make nbmanpages DESTDIR=%{buildroot} 'INSTALL=/usr/bin/install -p'
 
 # Install desktop file
 install -d %{buildroot}%{_datadir}/applications
@@ -54,4 +54,3 @@ install -p -m 644 src/%{name}.svg \
 %changelog
 * Sat Oct 03 2026 Andrea Musuruane <musuruan@gmail.com> - 6.0.2-1
 - First release
-
